@@ -1,0 +1,691 @@
+/* ===========================
+   共通リセット
+=========================== */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+*, *:before, *:after {
+	box-sizing: border-box;
+}
+
+/* ===========================
+   基本スタイル
+=========================== */
+html, body {
+	font-size: clamp(21px, 1.8vw, 30px);
+	background: #eee;
+	height: 100%;
+	overflow: hidden; 
+        font-family:"Lato","Noto Sans JP","Yu Gothic UI","Yu Gothic",Meiryo,sans-serif;
+}
+#container {
+	background: #eee;
+	margin-left: 300px;
+	position: relative;
+	transition: margin-left .25s linear;
+	z-index: 900;
+	height: 100vh;
+  	display: flex;
+  	flex-direction: column;
+}
+
+#main {
+	background: #eee;
+	padding-top: clamp(2rem, 4vw, 3.125rem);
+	flex: 1 1 auto;
+  	overflow-y: auto;
+}
+
+#main p {
+	margin-bottom: 1em;
+	margin-left: 0; /* 左余白は内側 padding で調整 */
+	margin-right: 0; /* 右余白を削減 */
+	line-height: 1.9;
+	font-size: clamp(21px, 1.8vw, 30px);
+	max-width: 100%;
+}
+
+#main,popup span {
+	display: inline;
+}
+
+#main h2 {
+	margin: 0;
+	line-height: 1.9;
+	font-size: clamp(48px, 4vw, 72px);
+}
+
+#main textarea {
+	margin-bottom: 0.2rem;
+	font-size: clamp(21px, 1.8vw, 30px);
+}
+
+#main .inner {
+	padding-top: clamp(1.5rem, 5vw, 3.75rem);
+	padding-left: 1rem;   /* 右余白と揃える */
+	padding-right: 1rem;
+	padding-bottom: 0;
+}
+
+/* ===========================
+   ヘッダーとサイドバー
+=========================== */
+#global-head {
+    position: fixed;
+    color: #033560;
+    width: 100%;
+    padding: 10px 30px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    z-index: 1100; 
+}
+
+#sidebar {
+	padding-top: 70px;
+	width: 300px;
+	height: 100%;
+	position: fixed;
+	color: #afc3f2;
+	background: #033560;
+}
+
+/* ===========================
+   ナビゲーション
+=========================== */
+#global-nav ul {
+	list-style: none;
+	margin-left: 0;
+}
+#global-nav > ul > li {
+	position: relative;
+}
+
+#global-nav a {
+	color: #aeb4cb;
+	text-decoration: none;
+	display: block;
+	padding: 15px;
+	transition: color .3s linear;
+}
+
+#global-nav .sub-menu.is-active > a,
+#global-nav a:hover {
+	color: #fff;
+}
+
+/* sub-menu icon */
+#global-nav .sub-menu-head {
+	position: relative;
+}
+#global-nav .sub-menu-head:after {
+	content: "";
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 18px;
+	margin: auto;
+	width: 8px;
+	height: 8px;
+	border-top: 1px solid #aeb4cb;
+	border-right: 1px solid #aeb4cb;
+	transform: rotate(45deg);
+	transition: .25s ease-in-out;
+}
+#global-nav .sub-menu.is-active > a:after,
+#global-nav .sub-menu-head:hover:after {
+	border-color: #fff;
+}
+#global-nav .is-active .sub-menu-head:after {
+	transform: rotate(135deg);
+}
+
+/* sub-menu */
+#global-nav .sub-menu-nav {
+	background: #032f55;
+	display: none;
+	padding: 10px 0;
+}
+#global-nav .sub-menu-nav a {
+	color: #aeb4cb;
+	padding: 8px 15px;
+}
+#global-nav .sub-menu-nav a.active {
+	background: #fff !important;
+	color: #033560 !important;
+	font-weight: bold;
+	border-left: 4px solid #ffcc00;
+}
+#global-nav .sub-menu-nav a:hover {
+	color: #fff;
+}
+
+/* ===========================
+   nav-toggle
+=========================== */
+#nav-toggle {
+	position: fixed;
+	top: calc(var(--header-h) / 2 - var(--toggle-size) / 2);
+	left: clamp(12px, 2vw, 20px);
+	width: var(--toggle-size);
+	height: var(--toggle-size);
+	z-index: 1000;
+}
+
+#nav-toggle > div {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+
+#nav-toggle span {
+	height: clamp(2px, 0.4vw, 3px);
+	background: #fff;
+	width: 100%;
+	left: 0;
+	display: block;
+	position: absolute;
+	transition: .35s ease-in-out;
+}
+
+#nav-toggle span:nth-child(1) { top: 0; }
+#nav-toggle span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+#nav-toggle span:nth-child(3) { bottom: 0; }
+
+.close #container { margin-left: 0; }
+.close #brand-logo { margin-left: 50px; }
+.close #nav-toggle span { background: #033560; }
+
+/* ===========================
+   ヘッダーボタン
+=========================== */
+/* ===========================
+   右上ボタン調整
+=========================== */
+.header-buttons {
+    position: fixed;
+    top: 0;
+    right: 20px;
+    display: flex;
+    gap: 12px;
+    height: var(--header-h);    /* ヘッダー高さに追従 */
+    align-items: center;        /* 垂直中央揃え */
+    z-index: 1000;
+}
+
+.icon-btn {
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(var(--header-h) * 0.6);  /* 高さをヘッダー比で調整 */
+    width: calc(var(--header-h) * 0.6);   /* 幅も正方形に */
+}
+
+.icon-btn img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* ===========================
+   ポップアップ
+=========================== */
+.popup {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.7);
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	z-index: 2000;
+}
+.popup.show { display: flex; }
+.popup .content {
+  background: #fff;
+  padding: clamp(1.25rem, 3.5vw, 2.5rem);
+
+  /* ▼ ここが重要 */
+  width: min(900px, calc(100vw - 2rem));
+  max-width: 100%;
+
+  border-radius: clamp(8px, 1.4vw, 12px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  position: relative;
+
+  overflow-x: hidden;   /* 横方向は切る */
+  overflow-y: auto;
+
+  max-height: 90vh;
+  margin: auto;
+}
+
+.popup .close-btn {
+	position: absolute;
+	top: clamp(0.75rem, 1.2vw, 0.75rem);
+	right: clamp(0.75rem, 1.2vw, 0.75rem);
+	background: transparent;
+	border: none;
+	font-size: clamp(20px, 3vw, 24px);
+	cursor: pointer;
+	color: #333;
+}
+.popup .close-btn:hover { color: #033560; }
+
+/* ===========================
+   FW / ボタン / トグル
+=========================== */
+.fw-section {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: clamp(0.6rem, 1.6vw, 1rem);
+	position: relative;
+	min-height: 1.5em;
+	margin-bottom: clamp(0.75rem, 2vw, 1rem);
+}
+#output {
+	margin: 0;
+	padding-right: clamp(3.75rem, 8vw, 7.5rem);
+	min-height: clamp(1.6rem, 3.8vw, 2.4rem);
+	line-height: 2.4em;
+	font-size: clamp(21px, 1.8vw, 30px);
+}
+#addRowBtn,#btn, #apply {
+	font-size: clamp(21px, 1.8vw, 30px);
+	padding: clamp(0.3rem, 1vw, 0.6rem) clamp(0.6rem, 2vw, 0.8rem);
+	border: none;
+	background-color: #3498db;
+	color: white;
+	border-radius: 0.375rem;
+	cursor: pointer;
+}
+#addRowBtn,#btn:hover, #apply:hover { background-color: #2980b9; }
+
+/* 自動更新トグル */
+.auto-update {
+	display: flex;
+	align-items: center;
+	gap: clamp(0.25rem, 0.8vw, 0.5rem);
+	margin-top: 1rem;
+}
+.switch {
+	position: relative;
+	display: inline-block;
+	width: 50px;
+	height: 24px;
+	transform: scale(var(--toggle-scale, 1));
+	transform-origin: left center;
+}
+.switch input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+.slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0; left: 0; right: 0; bottom: 0;
+	background-color: #ccc;
+	border-radius: 24px;
+	transition: 0.4s;
+}
+.slider::before {
+	position: absolute;
+	content: "";
+	height: 18px;
+	width: 18px;
+	left: 3px;
+	bottom: 3px;
+	background-color: white;
+	border-radius: 50%;
+	transition: 0.4s;
+}
+.switch input:checked + .slider { background-color: #3498db; }
+.switch input:checked + .slider::before { transform: translateX(26px); }
+
+:root {
+	--toggle-scale: 1;
+	--header-h: 60px;
+	--toggle-size: calc(var(--header-h) * 0.55);
+}
+
+@media screen and (min-width: 901px) {
+    #brand-logo {
+        transition: margin-left 0.25s linear;
+    }
+    #container.close #brand-logo {
+        margin-left: calc(300px + 50px); /* サイドバー幅 + 元の余白 */
+    }
+}
+@media screen and (max-width: 900px) {
+    /* container の左右マージンリセット */
+    #container {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    /* ロゴとハンバーガーアイコン */
+    #brand-logo {
+        max-width: calc(100% - 36px*2 - 20px*2 - 10px); /* 右上ボタン2つ + マージン調整 */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: clamp(24px, 5vw, 36px); /* フォントサイズ調整 */
+        margin-left: calc(var(--toggle-size) + 10px);
+    }
+
+    /* サイドバーボタンの色 */
+    #nav-toggle span {
+        background: #033560;
+    }
+    .close #nav-toggle span {
+        background: #fff;
+    }
+
+    /* main 全体を幅いっぱいに */
+    #main {
+        width: 100vw;
+        margin-left: 0;
+        margin-right: 0;
+        box-sizing: border-box;
+        overflow-x: hidden; /* 横スクロール防止 */
+    }
+
+    /* p 要素の余白リセット */
+    #main p {
+        margin-left: 0;
+        margin-right: 0;
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    /* span は親幅を超えないように調整 */
+    #main span {
+        display: inline-block;
+        max-width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* inner の左右パディング最小化、幅100% */
+    #main .inner {
+        padding-top: clamp(1rem, 2vw, 2rem);
+        padding-left: 0.3rem;
+        padding-right: 0.3rem;
+        padding-bottom: 0;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* サイドバーはオーバーレイ */
+    #sidebar {
+        left: -300px;
+        z-index: 910;
+        transition: .35s ease-in-out;
+    }
+    .close #sidebar {
+        left: 0;
+    }
+    .close #brand-logo {
+        margin-left: calc(var(--toggle-size) + 10px); /* 通常時と同じにする */
+    }
+    #output {
+        min-height: 4em; /* 初期状態でも高さを確保 */
+        line-height: 1.9; /* テキストと同じ行間 */
+        word-break: break-word; /* 長い単語でも折り返す */
+    }
+}
+
+.table-wrapper {
+    max-height: 400px;
+    overflow: auto; /* 縦横スクロール */
+    border: 1px solid #033560;
+    background-color: #fff;
+}
+
+.table {
+    border-collapse: collapse;
+    table-layout: auto;
+    width: max-content;      /* 親幅に合わせる */
+    min-width: 100%; /* 必要に応じて横スクロール */
+    font-size: clamp(21px, 1.8vw, 30px);
+}
+/* セル内入力欄を幅いっぱいに（padding分を考慮） */
+.table input,
+.table select,
+.table button {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.3em;
+    font-size: clamp(21px, 1.8vw, 30px);
+    border-radius: 0.25rem;
+}
+
+input,
+button{
+    box-sizing: border-box;
+    padding: 0.3em;
+    font-size: clamp(21px, 1.8vw, 30px);
+    border-radius: 0.25rem;
+}
+
+/* セルの枠線 */
+.table th,
+.table td {
+    border: 1px solid #033560;
+    padding: 0.3em;
+    text-align: left;
+}
+
+
+/* ヘッダー背景 */
+.table th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+.table .delete-btn,
+.table #addRowBtn {
+    display: inline-block;       /* inline-block にしてセル幅に収まる */
+    width: 100%;                 /* セルいっぱいに広げたい場合 */
+    min-width: 4ch;              /* 最低幅を確保 */
+    padding: 0.3em 0;            /* 上下 padding は固定、左右は自動 */
+    text-align: center;           /* 文字を中央揃え */
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 0.25rem;
+    font-size: clamp(21px, 1.8vw, 30px);
+    cursor: pointer;
+    box-sizing: border-box;      /* パディング込みで幅計算 */
+}
+
+.table .delete-btn:hover,
+.table #addRowBtn:hover {
+    background-color: #2980b9;
+}
+/* エラーメッセージ */
+.table #errorMsg {
+    color: red;
+    margin-top: 0.5em;
+    height: 1.2em;
+    background: none;
+    border: none;
+    padding: 0;
+    display: block;      /* 念のため明示 */
+    overflow: visible;   /* スクロールの影響を受けない */
+}
+/* 入力専用行の背景 */
+.table #inputRow {
+    background-color: #fff;
+}
+
+.table col.col1 {
+    min-width: 15ch;      /* IPv4 最低長 */
+}
+
+.table input[type="text"] {
+    width: 100%;
+    min-width: 0;         /* ← input には持たせない */
+}
+
+.table td:first-child input {
+    width: 100%;          /* セル幅に合わせる */
+    min-width: 6ch;      /* IPv4最大長を確保 */
+    box-sizing: border-box; /* padding を含めてセル幅いっぱいに */
+    padding: 0.3em;
+}
+/*確認ポップアップ*/
+.popup-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.popup-buttons button {
+  padding: 0.3rem 0.6rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#popupYes { background-color: #3498db; color: white; }
+#popupNo { background-color: #ccc; }
+
+/* ▼ 既存 popupYes / popupNo の見た目を流用 */
+#addVpnUser {
+  background-color: #3498db;
+  color: white;
+}
+
+#cancelVpnUser {
+  background-color: #ccc;
+  color: #333;
+}
+
+/* hover も揃える（任意だが推奨） */
+#addVpnUser:hover {
+  background-color: #2980b9;
+}
+
+#cancelVpnUser:hover {
+  background-color: #aaa;
+}
+
+
+
+/* 共通ボタンデザイン */
+.btn-primary {
+  font-size: clamp(21px, 1.8vw, 30px);
+  padding: clamp(0.3rem, 1vw, 0.6rem) clamp(0.6rem, 2vw, 0.8rem);
+  border: none;
+  background-color: #3498db;
+  color: #fff;
+  border-radius: 0.375rem;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #2980b9;
+}
+
+/* table 内の追加・削除ボタンを統一 */
+.table .btn-primary {
+    padding: clamp(0.3rem, 1vw, 0.6rem) clamp(0.6rem, 2vw, 0.8rem);
+    border-radius: 0.375rem;
+    width: 100%;
+}
+
+#sidebar {
+    overflow-y: auto;
+}
+
+.vpn-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.vpn-field {
+  display: flex;          /* ← 同じ行にする */
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/*ギブアップボタン*/
+.icon-btn.giveup-btn img {
+    content: url("icons/giveup.svg"); /* ← 新しいアイコン */
+}
+
+.icon-btn.giveup-btn {
+    width : auto;
+    height : 50%;   /* ← 好きなサイズに */
+}
+
+/* PSK 行：入力欄は可変、ボタンは固定 */
+#vpnPsk {
+  flex: 1 1 auto;
+  min-width: 0;   /* ← これがないと縮まらないことがある */
+  max-width: 12rem;  
+}
+
+#applyPsk {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  min-width: 4ch; /* 「適用」が潰れない最低幅 */
+}
+
+/* ▼ ポップアップ入力行：必ず1行に収める */
+.vpn-field {
+  flex-wrap: nowrap;      /* ← 折り返さない */
+  overflow: hidden;      /* ← はみ出し防止 */
+  width :100%;
+}
+
+/* ラベルは固定 */
+.vpn-label {
+  flex: 0 0 8ch;
+  white-space: nowrap;
+}
+
+/* ポップアップの入力：上限を固定chではなく親幅基準に */
+.vpn-field input {
+  flex: 1 1 0;
+  min-width: 0;
+  width: auto;
+  max-width: 100%;
+}
+
+/* ▼ VPNユーザー追加ポップアップでは横幅をフルに使う */
+
+/* 行は100%使う（上限の中で） */
+#vpnUserInputArea .vpn-field{
+  width: 100%;
+}
+
+/* 入力欄は行の残りを使って伸縮 */
+#vpnUserInputArea .vpn-field input{
+  flex: 1 1 0;
+  min-width: 0;
+  width: 100%;
+  max-width: none;
+}
+
+/* フォーム塊に上限＋中央寄せ */
+#vpnUserInputArea .vpn-input-wrapper{
+  width: 100%;
+  margin: 0 auto;          /* ← これ */
+}
+

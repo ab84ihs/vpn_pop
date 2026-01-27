@@ -1,0 +1,16 @@
+<svg width="1067" height="999" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" overflow="hidden">
+  <g transform="translate(-511 -765)">
+    <rect x="514.5" y="768.5" width="55" height="992"
+          stroke="#033560" stroke-width="6.875" stroke-miterlimit="8" fill="#033560"/>
+    <rect x="514.5" y="770.5" width="763" height="55"
+          stroke="#033560" stroke-width="6.875" stroke-miterlimit="8" fill="#033560"/>
+    <rect x="514.5" y="1705.5" width="763" height="55"
+          stroke="#033560" stroke-width="6.875" stroke-miterlimit="8" fill="#033560"/>
+    <rect x="1222.5" y="770.5" width="55" height="322"
+          stroke="#033560" stroke-width="6.875" stroke-miterlimit="8" fill="#033560"/>
+    <rect x="1227.5" y="1438.5" width="55" height="322"
+          stroke="#033560" stroke-width="6.875" stroke-miterlimit="8" fill="#033560"/>
+    <path d="M1055.5 1203.5 1448.5 1203.5 1448.5 1141.5 1572.5 1265.5 1448.5 1389.5 1448.5 1327.5 1055.5 1327.5Z"
+          stroke="#033560" stroke-width="6.875" stroke-miterlimit="8" fill="#033560" fill-rule="evenodd"/>
+  </g>
+</svg>
